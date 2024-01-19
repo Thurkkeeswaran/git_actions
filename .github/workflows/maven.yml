@@ -1,17 +1,14 @@
 name: Build
-
 on:
   push:
     branches:
-      - main
+      - main # the name of your main branch
   pull_request:
     types: [opened, synchronize, reopened]
-
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    permissions: read-all
     steps:
       - uses: actions/checkout@v2
         with:
@@ -36,4 +33,4 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=MAVEN_GIT -Dsonar.projectName='MAVEN_GIT'
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
